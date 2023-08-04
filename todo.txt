@@ -1,0 +1,12 @@
+///////////////////// Инициализация проекта
+
+1. Создаем проект не через create-react-app ,а через create-next-app, приложение на next.js
+- npx create-next-app@11.1.0 --typescript (версия)
+2. Устанавливаем MUI с иконками
+- npm install @material-ui/core @material-ui/icons
+- npm install @material-ui/core@4.12.3 @material-ui/icons@4.11.2 (версия)
+3. Устанавливаем sass
+- npm i sass
+- npm i sass@1.38.0 (версия)
+4. Устанавливаем библиотеку macro-css
+- npm i macro-css@1.0.5 (версия)
