@@ -15,9 +15,10 @@ import { MainLayout } from '../layouts/MainLayout';
 // import { FollowButton } from '../components/FollowButton';
 import { FC } from 'react';
 import { FollowButton } from '../components/FollowButton';
+import { NextPage } from 'next';
 // import { ResponseUser } from '../utils/api/types';
 
-const Rating: FC = () => {
+const Rating: NextPage = () => {
   return (
     <MainLayout>
       <Paper className="pl-20 pt-20 pr-20 mb-20" elevation={0}>

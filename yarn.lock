@@ -237,14 +237,10 @@
     "@babel/helper-validator-identifier" "^7.14.9"
     to-fast-properties "^2.0.0"
 
-"@editorjs/editorjs@^2.22.2":
-  version "2.22.2"
-  resolved "https://registry.npmjs.org/@editorjs/editorjs/-/editorjs-2.22.2.tgz"
-  integrity sha512-rPCv7Z5LZebreQaaL4DZuWzoVGEqwB+P7BF1dsefGQNBmLyeLF412topeW2b6e+g4l1oQ7t75kCOACNTEyYYIA==
-  dependencies:
-    codex-notifier "^1.1.2"
-    codex-tooltip "^1.0.2"
-    nanoid "^3.1.22"
+"@editorjs/editorjs@^2.27.2":
+  version "2.27.2"
+  resolved "https://registry.npmjs.org/@editorjs/editorjs/-/editorjs-2.27.2.tgz"
+  integrity sha512-k4LavGJijAP0F1wATQ0fTo10xtBSny9z6yWaP3ANqqtyKr+pBMind5NQzckqYI0yPp31GObpcS/HsFGsFOGcug==
 
 "@emotion/hash@^0.8.0":
   version "0.8.0"
@@ -1049,16 +1045,6 @@ clsx@^1.0.4, clsx@^1.1.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/clsx/-/clsx-1.1.1.tgz"
   integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
-
-codex-notifier@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.npmjs.org/codex-notifier/-/codex-notifier-1.1.2.tgz"
-  integrity sha512-DCp6xe/LGueJ1N5sXEwcBc3r3PyVkEEDNWCVigfvywAkeXcZMk9K41a31tkEFBW0Ptlwji6/JlAb49E3Yrxbtg==
-
-codex-tooltip@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/codex-tooltip/-/codex-tooltip-1.0.2.tgz"
-  integrity sha512-oC+Bu5X/zyhbPydgMSLWKoM/+vkJMqaLWu3Dt/jZgXS3MWK23INwC5DMBrVXZSufAFk0i0SUni38k9rLMyZn/w==
 
 color-convert@^1.9.0:
   version "1.9.3"
@@ -2536,7 +2522,7 @@ nanoclone@^0.2.1:
   resolved "https://registry.npmjs.org/nanoclone/-/nanoclone-0.2.1.tgz"
   integrity sha512-wynEP02LmIbLpcYw8uBKpcfF6dmg2vcpKqxeH5UcoKEYdExslsdUA4ugFauuaeYdTB76ez6gJW8XAZ6CgkXYxA==
 
-nanoid@^3.1.22, nanoid@^3.1.23:
+nanoid@^3.1.23:
   version "3.1.25"
   resolved "https://registry.npmjs.org/nanoid/-/nanoid-3.1.25.tgz"
   integrity sha512-rdwtIXaXCLFAQbnfqDRnI6jaRHp9fTcYBjtFKE8eezcZ7LuLjhUaQGNeMXf1HmRoCH32CLz6XwX0TtxEOS/A3Q==
