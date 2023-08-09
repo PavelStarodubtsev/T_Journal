@@ -21,6 +21,8 @@ const menu = [
 export const LeftMenu: FC = () => {
   const router = useRouter();
 
+
+
   return (
     <div className={styles.menu}>
       <ul>
