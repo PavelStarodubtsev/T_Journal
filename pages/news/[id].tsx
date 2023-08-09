@@ -5,8 +5,6 @@ import { PostComments } from '../../components/PostComments';
 import { comments } from '../../data';
 
 const FullPostPage: FC = () => {
-  console.log('FullPostPage-comments', comments);
-
   return (
     <MainLayout className="mb-50" contentFullWidth>
       <FullPost />
