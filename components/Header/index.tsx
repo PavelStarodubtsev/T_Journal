@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { Paper, Button, IconButton, Avatar, Link } from '@material-ui/core';
 import {
   SearchOutlined as SearchIcon,
@@ -10,8 +10,19 @@ import {
 } from '@material-ui/icons';
 
 import styles from './Header.module.scss';
+import AuthDialog from '../AuthDialog';
 
 export const Header: FC = () => {
+  const [authVisible, setAuthVisible] = useState(false);
+
+  const openAuthDialog = () => {
+    setAuthVisible(true);
+  };
+
+  const closeAuthDialog = () => {
+    setAuthVisible(false);
+  };
+
   return (
     <Paper classes={{ root: styles.root }} elevation={0}>
       <div className="d-flex align-center">
@@ -40,7 +51,7 @@ export const Header: FC = () => {
         <IconButton>
           <NotificationIcon />
         </IconButton>
-        <Link href="/profile/1">
+        {/* <Link href="/profile/1">
           <a className="d-flex align-center">
             <Avatar
               className={styles.avatar}
@@ -49,8 +60,13 @@ export const Header: FC = () => {
             />
             <ArrowBottom style={{ color: 'black' }} />
           </a>
-        </Link>
+        </Link> */}
+        <div className={styles.loginButton} onClick={openAuthDialog}>
+          <UserIcon />
+          Войти
+        </div>
       </div>
+      <AuthDialog onClose={closeAuthDialog} visible={authVisible} />
     </Paper>
   );
 };
