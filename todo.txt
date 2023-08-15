@@ -10,3 +10,5 @@
 - npm i sass@1.38.0 (версия)
 4. Устанавливаем библиотеку macro-css
 - npm i macro-css@1.0.5 (версия)
+5. Устанавливаем nookies - для того чтобы в next.js работать с куками 
+- npm i nookies
