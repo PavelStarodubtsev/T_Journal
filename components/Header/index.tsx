@@ -11,8 +11,13 @@ import {
 
 import styles from './Header.module.scss';
 import AuthDialog from '../AuthDialog';
+import { selectUserData } from '../../redux/slices/user';
+import { useAppSelector } from '../../redux/hooks';
 
 export const Header: FC = () => {
+  const userData = useAppSelector(selectUserData);
+  console.log('userData', userData);
+
   const [authVisible, setAuthVisible] = useState(false);
 
   const openAuthDialog = () => {
@@ -51,20 +56,23 @@ export const Header: FC = () => {
         <IconButton>
           <NotificationIcon />
         </IconButton>
-        {/* <Link href="/profile/1">
-          <a className="d-flex align-center">
-            <Avatar
-              className={styles.avatar}
-              alt="Remy Sharp"
-              src="https://leonardo.osnova.io/5ffeac9a-a0e5-5be6-98af-659bfaabd2a6/-/scale_crop/108x108/-/format/webp/"
-            />
-            <ArrowBottom style={{ color: 'black' }} />
-          </a>
-        </Link> */}
-        <div className={styles.loginButton} onClick={openAuthDialog}>
-          <UserIcon />
-          Войти
-        </div>
+        {userData ? (
+          <Link href="/profile/1">
+            <a className="d-flex align-center">
+              <Avatar
+                className={styles.avatar}
+                alt="Remy Sharp"
+                src="https://leonardo.osnova.io/5ffeac9a-a0e5-5be6-98af-659bfaabd2a6/-/scale_crop/108x108/-/format/webp/"
+              />
+              <ArrowBottom style={{ color: 'black' }} />
+            </a>
+          </Link>
+        ) : (
+          <div className={styles.loginButton} onClick={openAuthDialog}>
+            <UserIcon />
+            Войти
+          </div>
+        )}
       </div>
       <AuthDialog onClose={closeAuthDialog} visible={authVisible} />
     </Paper>
