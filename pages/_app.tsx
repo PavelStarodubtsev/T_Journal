@@ -1,14 +1,15 @@
-import { CssBaseline, MuiThemeProvider } from '@material-ui/core';
-import { theme } from '../theme';
-import type { AppProps } from 'next/app';
-import { Header } from '../components/Header';
 import Head from 'next/head';
+import { CssBaseline, MuiThemeProvider } from '@material-ui/core';
+import type { AppProps } from 'next/app';
+
+import { Header } from '../components/Header';
+import { store, wrapper } from '../redux/store';
+import { theme } from '../theme';
+
 import '../styles/globals.scss';
 import 'macro-css';
-import { Provider } from 'react-redux';
-import { store } from '../redux/store';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
@@ -23,12 +24,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <Provider store={store}>
-          <Header />
-          <Component {...pageProps} />
-        </Provider>
+        <Header />
+        <Component {...pageProps} />
       </MuiThemeProvider>
     </>
   );
 }
-export default MyApp;
+
+// К next.js - приложению прикрутили прикрутили логику Redux,
+// которое будет доступно на уровне SSR
+export default wrapper.withRedux(App);

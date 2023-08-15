@@ -12,3 +12,5 @@
 - npm i macro-css@1.0.5 (версия)
 5. Устанавливаем nookies - для того чтобы в next.js работать с куками 
 - npm i nookies
+6. Устанавливаем next-redux-wrapper, чтобы сделать гидрацию и подружить Redux с бекома (Nest.js), 
+- npm install next-redux-wrapper

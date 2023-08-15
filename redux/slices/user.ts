@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ResponseUser } from '../../utils/api/types';
 import { RootState } from '../store';
+import { HYDRATE } from 'next-redux-wrapper';
 
 export interface UserState {
   data: ResponseUser | null;
@@ -18,12 +19,19 @@ export const userSlice = createSlice({
       state.data = action.payload;
     },
   },
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        ...action.payload.user,
+      };
+    },
+  },
 });
 
 // Action creators are generated for each case reducer function
 export const { setUserData } = userSlice.actions;
 
-export const userReducer = userSlice.reducer; 
+export const userReducer = userSlice.reducer;
 
-export const selectUserData = (state:RootState) => state.user.data;
-
+export const selectUserData = (state: RootState) => state.user.data;
