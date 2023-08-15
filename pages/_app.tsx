@@ -5,6 +5,8 @@ import { Header } from '../components/Header';
 import Head from 'next/head';
 import '../styles/globals.scss';
 import 'macro-css';
+import { Provider } from 'react-redux';
+import { store } from '../redux/store';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -21,8 +23,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <Header />
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <Header />
+          <Component {...pageProps} />
+        </Provider>
       </MuiThemeProvider>
     </>
   );

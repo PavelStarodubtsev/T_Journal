@@ -8,12 +8,15 @@ import { FormField } from '../FormField';
 import { UserApi } from '../../utils/api';
 import { LoginDto } from '../../utils/api/types';
 import { setCookie } from 'nookies';
+import { useAppDispatch } from '../../redux/hooks';
+import { setUserData } from '../../redux/slices/user';
 
 interface LoginFormProps {
   onOpenRegister: () => void;
 }
 
 const LoginForm: FC<LoginFormProps> = ({ onOpenRegister }) => {
+  const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState('');
 
   const form = useForm({
@@ -24,13 +27,13 @@ const LoginForm: FC<LoginFormProps> = ({ onOpenRegister }) => {
   const onSubmit = async (dto: LoginDto) => {
     try {
       const data = await UserApi.login(dto);
-      console.log('LoginFormdata', data);
 
       setCookie(null, 'rtoken', data.token, {
         maxAge: 30 * 24 * 60 * 60,
         path: '/',
       });
       setErrorMessage('');
+      dispatch(setUserData(data));
     } catch (error) {
       console.warn('Login error', error);
       if (error.response) {
