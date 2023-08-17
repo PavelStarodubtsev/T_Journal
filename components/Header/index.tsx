@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Paper, Button, IconButton, Avatar, Link } from '@material-ui/core';
 import {
   SearchOutlined as SearchIcon,
@@ -16,8 +16,6 @@ import { useAppSelector } from '../../redux/hooks';
 
 export const Header: FC = () => {
   const userData = useAppSelector(selectUserData);
-  console.log('userData', userData);
-
   const [authVisible, setAuthVisible] = useState(false);
 
   const openAuthDialog = () => {
@@ -27,6 +25,12 @@ export const Header: FC = () => {
   const closeAuthDialog = () => {
     setAuthVisible(false);
   };
+
+  useEffect(() => {
+    if (authVisible && userData) {
+      setAuthVisible(false);
+    }
+  }, [authVisible, userData]);
 
   return (
     <Paper classes={{ root: styles.root }} elevation={0}>

@@ -8,6 +8,8 @@ import { theme } from '../theme';
 
 import '../styles/globals.scss';
 import 'macro-css';
+import { Api } from '../utils/api';
+import { setUserData } from '../redux/slices/user';
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -30,6 +32,23 @@ function App({ Component, pageProps }: AppProps) {
     </>
   );
 }
+App.getInitialProps = wrapper.getInitialAppProps((store) => async ({ ctx, Component }) => {
+  try {
+    const userData = await Api(ctx).user.getMe();
+    store.dispatch(setUserData(userData));
+  } catch (error) {
+    if (ctx.asPath === '/write') {
+      ctx.res.writeHead(302, {
+        Location: '/403',
+      });
+      ctx.res.end();
+    }
+    console.log(error);
+  }
+  return {
+    pageProps: Component.getInitialProps ? await Component.getInitialProps({ ...ctx, store }) : {},
+  };
+});
 
 // К next.js - приложению прикрутили прикрутили логику Redux,
 // которое будет доступно на уровне SSR
