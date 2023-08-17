@@ -5,11 +5,11 @@ import { Button } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import { LoginFormSchema } from '../../utils/validations';
 import { FormField } from '../FormField';
-import { UserApi } from '../../utils/api';
 import { LoginDto } from '../../utils/api/types';
 import { setCookie } from 'nookies';
 import { useAppDispatch } from '../../redux/hooks';
 import { setUserData } from '../../redux/slices/user';
+import { Api } from '../../utils/api';
 
 interface LoginFormProps {
   onOpenRegister: () => void;
@@ -26,7 +26,7 @@ const LoginForm: FC<LoginFormProps> = ({ onOpenRegister }) => {
 
   const onSubmit = async (dto: LoginDto) => {
     try {
-      const data = await UserApi.login(dto);
+      const data = await Api().user.login(dto);
 
       setCookie(null, 'rtoken', data.token, {
         maxAge: 30 * 24 * 60 * 60,
