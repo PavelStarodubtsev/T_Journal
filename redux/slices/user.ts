@@ -35,3 +35,4 @@ export const { setUserData } = userSlice.actions;
 export const userReducer = userSlice.reducer;
 
 export const selectUserData = (state: RootState) => state.user.data;
+

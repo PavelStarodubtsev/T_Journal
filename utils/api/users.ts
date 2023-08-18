@@ -9,6 +9,10 @@ const instance = axios.create({
 });
 
 export const UserApi = (instance: AxiosInstance) => ({
+  async getAll() {
+    const { data } = await instance.get<ResponseUser[]>('/users');
+    return data;
+  },
   async register(dto: CreateUserDto) {
     const { data } = await instance.post<CreateUserDto, { data: ResponseUser }>('/auth/register', dto);
     return data;
@@ -21,8 +25,4 @@ export const UserApi = (instance: AxiosInstance) => ({
     const { data } = await instance.get<ResponseUser>('/users/me');
     return data;
   },
-  //   async getMe(token: string) {
-  //     const { data } = await instance.get<{ ResponseUser }>('/users/me');
-  //     return data;
-  //   },
 });
