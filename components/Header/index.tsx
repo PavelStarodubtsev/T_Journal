@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Paper, Button, IconButton, Avatar, Link } from '@material-ui/core';
+import { Paper, Button, IconButton, Avatar, Link, List, ListItem } from '@material-ui/core';
 import {
   SearchOutlined as SearchIcon,
   SmsOutlined as MessageIcon,
@@ -13,10 +13,14 @@ import styles from './Header.module.scss';
 import AuthDialog from '../AuthDialog';
 import { selectUserData } from '../../redux/slices/user';
 import { useAppSelector } from '../../redux/hooks';
+import { PostItem } from '../../utils/api/types';
+import { Api } from '../../utils/api';
 
 export const Header: FC = () => {
   const userData = useAppSelector(selectUserData);
   const [authVisible, setAuthVisible] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+  const [posts, setPosts] = useState<PostItem[]>([]);
 
   const openAuthDialog = () => {
     setAuthVisible(true);
@@ -32,6 +36,16 @@ export const Header: FC = () => {
     }
   }, [authVisible, userData]);
 
+  const handleChangeInput = async (e) => {
+    setSearchValue(e.target.value);
+    try {
+      const { items } = await Api().post.search({ title: e.target.value });
+      setPosts(items);
+    } catch (error) {
+      console.warn(error);
+    }
+  };
+
   return (
     <Paper classes={{ root: styles.root }} elevation={0}>
       <div className="d-flex align-center">
@@ -43,7 +57,20 @@ export const Header: FC = () => {
         </a>
         <div className={styles.searchBlock}>
           <SearchIcon />
-          <input placeholder="Поиск" />
+          <input value={searchValue} onChange={handleChangeInput} placeholder="Поиск" />
+          {posts.length > 0 && (
+            <Paper className={styles.searchBlockPopup}>
+              <List>
+                {posts?.map((obj) => (
+                  <Link key={obj.id} href={`/news/${obj.id}`}>
+                    <a>
+                      <ListItem button>{obj.title}</ListItem>
+                    </a>
+                  </Link>
+                ))}
+              </List>
+            </Paper>
+          )}
         </div>
 
         <Link href="/write">

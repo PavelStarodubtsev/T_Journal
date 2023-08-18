@@ -4,9 +4,13 @@ import data from '../../data';
 import { CommentItem } from './CommentItem';
 import clsx from 'clsx';
 import styles from './SideComments.module.scss';
+import { useComments } from '../../hooks/useComments';
 
 export const SideComments = () => {
-  //   const { comments } = useComments();
+  // кастомный хук, принимет id-поста, возвращает массив
+  // комментариев по postId, делает fetch запрос к БД
+  // postId мы уже передаем в компоненте PostComments,здесь только получаем комменты
+  const { comments } = useComments();
   const [visible, setVisible] = React.useState(true);
 
   const toggleVisible = () => {
@@ -18,15 +22,7 @@ export const SideComments = () => {
       <h3 onClick={toggleVisible}>
         Комментарии <ArrowRightIcon />
       </h3>
-      {visible &&
-        data.comments?.popular?.map((obj) => (
-          <CommentItem
-            key={obj?.id}
-            user={obj?.user}
-            text={obj?.text}
-            post={obj?.post}
-          />
-        ))}
+      {visible && comments?.map((obj) => <CommentItem key={obj?.id} {...obj} />)}
     </div>
   );
 };

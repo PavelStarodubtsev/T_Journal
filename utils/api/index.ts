@@ -3,12 +3,12 @@ import axios from 'axios';
 import { GetServerSidePropsContext, NextPageContext } from 'next';
 import { UserApi } from './users';
 import { PostApi } from './post';
-// import { CommentApi } from './comment';
+import { CommentApi } from './comment';
 
 export type ApiReturnType = {
   user: ReturnType<typeof UserApi>;
   post: ReturnType<typeof PostApi>;
-  //   comment: ReturnType<typeof CommentApi>;
+  comment: ReturnType<typeof CommentApi>;
 };
 
 export const Api = (ctx?: NextPageContext | GetServerSidePropsContext): ApiReturnType => {
@@ -25,5 +25,22 @@ export const Api = (ctx?: NextPageContext | GetServerSidePropsContext): ApiRetur
   return {
     user: UserApi(instance),
     post: PostApi(instance),
+    comment: CommentApi(instance),
   };
+
+  // * Вариант если бы у нас было таких функций много
+  //   const apis = {
+  //     user: UserApi,
+  //     post: PostApi,
+  //     comment: CommentApi,
+  //   };
+
+  //   const result = Object.entries(apis).reduce((prev, [key, f]) => {
+  //     return {
+  //       ...prev,
+  //       [key]: f(instance),
+  //     };
+  //   }, {} as ApiReturnType);
+
+  //   return result;
 };

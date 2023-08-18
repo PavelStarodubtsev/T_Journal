@@ -12,13 +12,17 @@ import {
 } from '@material-ui/core';
 
 import { MainLayout } from '../layouts/MainLayout';
-// import { FollowButton } from '../components/FollowButton';
 import { FC } from 'react';
 import { FollowButton } from '../components/FollowButton';
 import { NextPage } from 'next';
-// import { ResponseUser } from '../utils/api/types';
+import { Api } from '../utils/api';
+import { ResponseUser } from '../utils/api/types';
 
-const Rating: NextPage = () => {
+interface RatingPageProps {
+  users: ResponseUser[];
+}
+
+const Rating: NextPage<RatingPageProps> = ({ users }) => {
   return (
     <MainLayout>
       <Paper className="pl-20 pt-20 pr-20 mb-20" elevation={0}>
@@ -47,17 +51,7 @@ const Rating: NextPage = () => {
           </TableHead>
 
           <TableBody>
-            <TableCell component="th" scope="row">
-              <span className="mr-15">1</span> Вася Подзалупкин
-            </TableCell>
-            <TableCell align="right">540</TableCell>
-            <TableCell align="right">
-              <FollowButton />
-            </TableCell>
-          </TableBody>
-
-          {/* <TableBody>
-            {users.map((obj) => (
+            {users?.map((obj) => (
               <TableRow key={obj.id}>
                 <TableCell component="th" scope="row">
                   <span className="mr-15">{obj.id}</span>
@@ -69,11 +63,29 @@ const Rating: NextPage = () => {
                 </TableCell>
               </TableRow>
             ))}
-          </TableBody> */}
+          </TableBody>
         </Table>
       </Paper>
     </MainLayout>
   );
+};
+
+export const getServerSideProps = async () => {
+  try {
+    const users = await Api().user.getAll();
+    return {
+      props: {
+        users,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      props: {
+        users: null,
+      },
+    };
+  }
 };
 
 export default Rating;
